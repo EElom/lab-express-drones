@@ -17,12 +17,22 @@ router.get('/drones', (req, res, next) => {
 
 router.get('/drones/create', (req, res, next) => {
   // Iteration #3: Add a new drone
-  // ... your code here
-});
+    res.render('drones/drones-create');
+})
 
 router.post('/drones/create', (req, res, next) => {
   // Iteration #3: Add a new drone
-  // ... your code here
+    try {
+      const { name, propellers, maxSpeed } = req.body;
+      await Drone.create({
+        name,
+        propellers,
+        maxSpeed
+      })
+      res.redirect("/drones");
+    } catch (err) {
+      console.error(error);
+    }
 });
 
 router.get('/drones/:id/edit', (req, res, next) => {
